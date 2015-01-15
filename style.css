@@ -1,0 +1,24 @@
+#nav ul{
+ margin:0;
+ padding:0;
+ list-style:none;
+ width:100%;
+ height:100%;
+ float:left;
+ background:green;
+ }
+ #nav li{
+ display:inline;
+ }
+ #nav li a{
+ display:block;
+ float:left;
+ padding:5px 9:10 08/01/20152px;
+ text-decoration:none;
+ color:#FFFFFF;
+ font:25px Arial, Helvetica, sans-serif;
+ border-right:1px solid #FF9900;
+ }
+ #nav li a:hover{
+ background:#FF9900;
+ }

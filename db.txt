@@ -1,0 +1,185 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.9
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 07, 2014 at 04:08 PM
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `db_ujianonline`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id_admin` int(2) NOT NULL AUTO_INCREMENT,
+  `nama_admin` varchar(20) DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `SID` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_admin`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`, `SID`) VALUES
+(1, 'Administrator', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'a2lf6kugi01hmd3ii7g9knd236');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_jurusan`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_jurusan` (
+  `id_jurusan` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_jurusan` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_jurusan`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tabel_jurusan`
+--
+
+INSERT INTO `tabel_jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
+(1, 'IPA'),
+(2, 'IPS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_nilai`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_nilai` (
+  `id_nilai` int(4) NOT NULL AUTO_INCREMENT,
+  `id_user` varchar(100) NOT NULL,
+  `benar` int(4) NOT NULL,
+  `salah` int(4) NOT NULL,
+  `kosong` int(4) NOT NULL,
+  `point` int(4) NOT NULL,
+  `tanggal` date NOT NULL,
+  PRIMARY KEY (`id_nilai`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `tabel_nilai`
+--
+
+INSERT INTO `tabel_nilai` (`id_nilai`, `id_user`, `benar`, `salah`, `kosong`, `point`, `tanggal`) VALUES
+(7, '6', 1, 1, 0, 50, '2014-01-07'),
+(8, '6', 1, 1, 0, 50, '2014-01-07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_soal`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_soal` (
+  `id_soal` int(4) NOT NULL AUTO_INCREMENT,
+  `id_jurusan` int(11) NOT NULL,
+  `id_mapel` int(10) NOT NULL,
+  `pertanyaan` text NOT NULL,
+  `pilihan_a` varchar(100) NOT NULL,
+  `pilihan_b` varchar(100) NOT NULL,
+  `pilihan_c` varchar(100) NOT NULL,
+  `pilihan_d` varchar(100) NOT NULL,
+  `pilihan_e` varchar(100) DEFAULT NULL,
+  `jawaban` varchar(100) NOT NULL,
+  `publish` enum('yes','no') NOT NULL,
+  PRIMARY KEY (`id_soal`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tabel_soal`
+--
+
+INSERT INTO `tabel_soal` (`id_soal`, `id_jurusan`, `id_mapel`, `pertanyaan`, `pilihan_a`, `pilihan_b`, `pilihan_c`, `pilihan_d`, `pilihan_e`, `jawaban`, `publish`) VALUES
+(1, 1, 2, '<p>3 X 3 Berapa hayoooo . . . ?</p>', '5', '6', '3', '8', '9', 'E', 'yes'),
+(2, 1, 1, '<p>x</p>', 'X', 'X', 'X', 'X', 'X', 'B', 'yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_user`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_user` (
+  `id_user` int(4) NOT NULL AUTO_INCREMENT,
+  `nama_user` varchar(200) COLLATE latin1_general_ci DEFAULT NULL,
+  `username` varchar(20) COLLATE latin1_general_ci DEFAULT NULL,
+  `password` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `jurusan` int(10) DEFAULT NULL,
+  `SID` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `konfirmasi` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `tabel_user`
+--
+
+INSERT INTO `tabel_user` (`id_user`, `nama_user`, `username`, `password`, `jurusan`, `SID`, `konfirmasi`) VALUES
+(2, 'Widi Yutriatmansyah', 'A11.06163', 'd41d8cd98f00b204e9800998ecf8427e', 1, '', 1),
+(4, 'a', 'a', '0cc175b9c0f1b6a831c399e269772661', NULL, '02k6t81v8p1bhe1qbrgnbkho23', NULL),
+(6, 'qq', 'qq', '099b3b060154898840f0ebdfb46ec78f', 0, '', 1),
+(7, 'qq', 'qq', '099b3b060154898840f0ebdfb46ec78f', 0, '', 1),
+(8, 'qq', 'qq', '099b3b060154898840f0ebdfb46ec78f', 0, '', 1),
+(9, 'qq', 'qq', '099b3b060154898840f0ebdfb46ec78f', 0, '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_mapel`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_mapel` (
+  `id_mapel` int(10) NOT NULL AUTO_INCREMENT,
+  `idJurusan` int(10) NOT NULL,
+  `nama_mpl` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_mapel`),
+  UNIQUE KEY `id_mapel_2` (`id_mapel`),
+  KEY `id_mapel` (`id_mapel`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tbl_mapel`
+--
+
+INSERT INTO `tbl_mapel` (`id_mapel`, `idJurusan`, `nama_mpl`) VALUES
+(1, 1, 'Bahasa Indonesia'),
+(2, 1, 'Matematika'),
+(3, 1, 'Biologi'),
+(4, 2, 'Sosial Budaya'),
+(5, 2, 'Matematika'),
+(6, 2, 'Bahasa Indonesia');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `x`
+--
+
+CREATE TABLE IF NOT EXISTS `x` (
+  `id` int(10) DEFAULT NULL,
+  `nama` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `x`
+--
+
+INSERT INTO `x` (`id`, `nama`) VALUES
+(1, 'widi');
